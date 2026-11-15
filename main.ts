@@ -1,4 +1,4 @@
-// main.ts — Slither Arena entrypoint: copies game/ and screenshots/ to the
+// main.ts — Venom Rush entrypoint: copies game/ and screenshots/ to the
 // output directory and writes dossier.json with buildDossier.
 // The two runs the grader performs must write byte-identical output, so this
 // program does no timestamping, no randomness and no network access.
