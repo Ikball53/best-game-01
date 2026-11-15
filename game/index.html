@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<title>Slither Arena — Eat, Boost, Trap &amp; Rule the Leaderboard</title>
+<title>Venom Rush — Eat, Boost, Trap &amp; Rule the Leaderboard</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -13,12 +13,12 @@
 
   <div id="hud" class="hidden">
     <div id="hud-left">
-      <div class="hud-title">SLITHER ARENA</div>
+      <div class="hud-title">VENOM RUSH</div>
       <div class="hud-row"><span>Score</span><b id="hud-score">0</b></div>
       <div class="hud-row"><span>Length</span><b id="hud-len">10</b></div>
       <div class="hud-row"><span>Combo</span><b id="hud-combo">x1</b></div>
       <div class="hud-row"><span>Rank</span><b id="hud-rank">#10</b></div>
-      <div id="hud-target">Target: reach Top 3 to WIN</div>
+      <div id="hud-target">Target: Top 3 + 2,500 score to WIN</div>
       <div id="hud-power"></div>
     </div>
     <div id="hud-right">
@@ -29,11 +29,12 @@
     <div id="event-banner" class="hidden"></div>
     <button id="mute-btn" class="round-btn" title="Mute">🔊</button>
     <div id="boost-hint">Hold SPACE / click &amp; hold to BOOST (shrinks you)</div>
+    <button id="boost-btn">⚡ BOOST</button>
   </div>
 
   <div id="start-screen" class="screen">
     <div class="panel">
-      <h1>SLITHER ARENA</h1>
+      <h1>VENOM RUSH</h1>
       <p class="pitch">Eat orbs, boost past rivals, trap snakes and rule the leaderboard.</p>
       <div class="start-cols">
         <div class="start-left">
@@ -51,7 +52,7 @@
             <div class="how-card"><span class="how-ico">●</span><b>Eat orbs</b><p>Glow orbs grow you. Gold orbs are worth 5x.</p></div>
             <div class="how-card"><span class="how-ico">⚡</span><b>Boost</b><p>Hold SPACE or click to speed up — it costs length.</p></div>
             <div class="how-card"><span class="how-ico">◎</span><b>Trap rivals</b><p>Cut across a snake's head so it crashes into you. It bursts into orbs.</p></div>
-            <div class="how-card"><span class="how-ico">👑</span><b>Win</b><p>Reach the Top 3 of the leaderboard. Beware the giant boss snake!</p></div>
+            <div class="how-card"><span class="how-ico">👑</span><b>Win</b><p>Reach the Top 3 with 2,500+ score. Beware the giant boss snake!</p></div>
           </div>
           <h3>TOP SNAKES</h3>
           <ol id="start-lb" class="mini-lb"></ol>
@@ -63,13 +64,13 @@
 
   <div id="win-screen" class="screen hidden">
     <div class="panel win-panel">
-      <h1 class="win-title">🏆 MENANG!</h1>
-      <p class="win-sub">You ruled the arena — Top 3!</p>
-      <div id="win-badge" class="badge hidden">★ REKOR BARU ★</div>
+      <h1 class="win-title">🏆 YOU WIN!</h1>
+      <p class="win-sub">You ruled the arena — Top 3 with 2,500+ score!</p>
+      <div id="win-badge" class="badge hidden">★ NEW RECORD ★</div>
       <div id="win-stats" class="stats-grid"></div>
       <div class="btn-row">
-        <button id="win-again" class="big-btn">Main Lagi</button>
-        <button id="win-skin" class="small-btn">Ganti Skin</button>
+        <button id="win-again" class="big-btn">Play Again</button>
+        <button id="win-skin" class="small-btn">Change Skin</button>
       </div>
     </div>
   </div>
@@ -81,7 +82,7 @@
       <div id="lose-stats" class="stats-grid"></div>
       <div class="btn-row">
         <button id="lose-again" class="big-btn">Play Again</button>
-        <button id="lose-menu" class="small-btn">Menu Utama</button>
+        <button id="lose-menu" class="small-btn">Main Menu</button>
       </div>
     </div>
   </div>

@@ -51,6 +51,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0e1a; f
 #event-banner { position: absolute; top: 90px; left: 50%; transform: translateX(-50%); background: rgba(255, 123, 61, 0.9); padding: 8px 18px; border-radius: 20px; font-weight: bold; font-size: 17px; animation: pulse 1s infinite; }
 @keyframes pulse { 50% { transform: translateX(-50%) scale(1.06); } }
 .round-btn { pointer-events: auto; position: absolute; bottom: 14px; right: 14px; width: 48px; height: 48px; border-radius: 50%; font-size: 22px; background: rgba(8, 14, 32, 0.85); border: 2px solid #2de2ff; cursor: pointer; }
+#boost-btn { pointer-events: auto; position: absolute; bottom: 90px; right: 14px; width: 76px; height: 76px; border-radius: 50%; font-size: 15px; font-weight: bold; background: rgba(255, 123, 61, 0.9); border: 2px solid #ffe14d; color: #fff; cursor: pointer; }
 #boost-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-size: 13px; color: #cfe8ff; background: rgba(8, 14, 32, 0.7); padding: 6px 12px; border-radius: 14px; }
 
 .win-panel { border-color: #ffe14d; box-shadow: 0 0 50px rgba(255, 225, 77, 0.5); text-align: center; }
@@ -69,7 +70,17 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0e1a; f
 @media (max-width: 700px) {
   .panel h1 { font-size: 34px; }
   .win-title { font-size: 44px !important; }
-  #leaderboard { min-width: 150px; }
+  #hud-left { min-width: 118px; padding: 6px 8px; top: 8px; left: 8px; }
+  .hud-title { font-size: 11px; }
+  .hud-row { font-size: 12px; }
+  #hud-target { font-size: 10.5px; }
+  #hud-power { font-size: 11px; }
+  #hud-right { top: 8px; right: 8px; }
+  #leaderboard { min-width: 118px; padding: 6px 8px; }
+  #leaderboard h3 { font-size: 10px; }
+  .mini-lb, #lb-list { font-size: 11px; }
+  #killfeed { top: 120px; font-size: 12px; max-width: 92vw; }
+  #event-banner { top: 168px; font-size: 14px; padding: 6px 14px; }
   #minimap { display: none; }
-  .hud-row { font-size: 13px; }
+  #boost-btn { bottom: 76px; right: 12px; width: 64px; height: 64px; font-size: 13px; }
 }

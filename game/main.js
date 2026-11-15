@@ -1,4 +1,4 @@
-// main.js — Slither Arena game loop: states, input, scoring, win/lose, demo scenes.
+// main.js — Venom Rush game loop: states, input, scoring, win/lose, demo scenes.
 (function () {
   'use strict';
   var canvas = document.getElementById('game');
@@ -39,8 +39,8 @@
   var demoNoWin = false; // progress demo scene only: stage a busy mid-game without triggering the win screen
 
   try {
-    bestScore = parseInt(window.localStorage.getItem('slitherArenaBest') || '0', 10) || 0;
-    bestLen = parseInt(window.localStorage.getItem('slitherArenaBestLen') || '0', 10) || 0;
+    bestScore = parseInt(window.localStorage.getItem('venomRushBest') || '0', 10) || 0;
+    bestLen = parseInt(window.localStorage.getItem('venomRushBestLen') || '0', 10) || 0;
   } catch (e) { bestScore = 0; bestLen = 0; }
 
   function resize() {
@@ -122,8 +122,8 @@
     if (isRecord) bestScore = score;
     if (player.pts.length > bestLen) bestLen = player.pts.length;
     try {
-      window.localStorage.setItem('slitherArenaBest', String(bestScore));
-      window.localStorage.setItem('slitherArenaBestLen', String(bestLen));
+      window.localStorage.setItem('venomRushBest', String(bestScore));
+      window.localStorage.setItem('venomRushBestLen', String(bestLen));
     } catch (e) {}
     return isRecord;
   }
@@ -214,7 +214,9 @@
   function updatePlaying(dt, now) {
     // input -> player target angle
     var head = player.pts[0];
-    if (mouse.active) {
+    if (mouse.joyOn) {
+      player.targetAngle = mouse.joyAngle;
+    } else if (mouse.active) {
       player.targetAngle = Math.atan2(mouse.y - canvas.height / 2, mouse.x - canvas.width / 2);
     } else if (keys['ArrowLeft'] || keys['a']) {
       player.targetAngle = player.angle - 0.09 * dt;
@@ -338,8 +340,8 @@
     });
     if (!boss.alive && Math.random() < 0.001) boss = Bots.makeBoss(ARENA);
 
-    // win check: Top 3
-    if (!demoNoWin && playerRank() <= 3) { doWin(); return; }
+    // win check: Top 3 with 2,500+ score after 60s of play
+    if (!demoNoWin && playerRank() <= 3 && score >= 2500 && (Date.now() - startTime) / 1000 >= 60) { doWin(); return; }
 
     // camera follows player
     camX = head.x - canvas.width / 2;
@@ -431,17 +433,31 @@
   canvas.addEventListener('mousemove', function (e) { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; });
   canvas.addEventListener('mousedown', function (e) { mouse.down = true; mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; });
   window.addEventListener('mouseup', function () { mouse.down = false; });
+  var joyOX = 0, joyOY = 0, joyActive = false;
   canvas.addEventListener('touchstart', function (e) {
     var t = e.touches[0];
-    mouse.x = t.clientX; mouse.y = t.clientY; mouse.active = true; mouse.down = true;
+    joyOX = t.clientX; joyOY = t.clientY; joyActive = true;
+    mouse.active = false; mouse.joyOn = false; mouse.down = false;
     e.preventDefault();
   }, { passive: false });
   canvas.addEventListener('touchmove', function (e) {
     var t = e.touches[0];
-    mouse.x = t.clientX; mouse.y = t.clientY; mouse.active = true;
+    if (!joyActive) return;
+    var dx = t.clientX - joyOX, dy = t.clientY - joyOY;
+    if (dx * dx + dy * dy > 10 * 10) {
+      mouse.joyAngle = Math.atan2(dy, dx);
+      mouse.joyOn = true;
+    }
     e.preventDefault();
   }, { passive: false });
-  canvas.addEventListener('touchend', function () { mouse.down = false; });
+  canvas.addEventListener('touchend', function () { joyActive = false; mouse.joyOn = false; mouse.active = false; mouse.down = false; });
+  var boostBtn = document.getElementById('boost-btn');
+  if (boostBtn) {
+    boostBtn.addEventListener('touchstart', function (e) { mouse.down = true; e.preventDefault(); }, { passive: false });
+    boostBtn.addEventListener('touchend', function () { mouse.down = false; });
+    boostBtn.addEventListener('mousedown', function () { mouse.down = true; });
+    boostBtn.addEventListener('mouseup', function () { mouse.down = false; });
+  }
 
   function toggleMute() {
     var m = SoundBank.toggleMute();

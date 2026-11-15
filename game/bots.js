@@ -33,7 +33,7 @@
     return {
       id: id, name: name, skin: skin, behaviour: behaviour,
       pts: pts, angle: 0, speed: speed, baseSpeed: speed,
-      radius: radius, score: len * 10, alive: true, targetLen: len,
+      radius: radius, score: len * 10, alive: true, targetLen: len, turnRate: id === 'player' ? 0.2 : 0.12,
       targetAngle: Math.random() * Math.PI * 2,
       retargetIn: 0, boost: false, shield: false
     };
@@ -49,8 +49,14 @@
       var radius = big ? 15 : (small ? 7 : 10);
       var x = 300 + Math.random() * (arenaSize - 600);
       var y = 300 + Math.random() * (arenaSize - 600);
+      var dx0 = x - arenaSize / 2, dy0 = y - arenaSize / 2;
+      while (dx0 * dx0 + dy0 * dy0 < 700 * 700) {
+        x = 300 + Math.random() * (arenaSize - 600);
+        y = 300 + Math.random() * (arenaSize - 600);
+        dx0 = x - arenaSize / 2; dy0 = y - arenaSize / 2;
+      }
       var bot = makeSnake('bot' + i, BOT_NAMES[i % BOT_NAMES.length], BOT_SKINS[i % BOT_SKINS.length], BOT_BEHAVIOURS[i % BOT_BEHAVIOURS.length], x, y, len, speed, radius);
-      bot.score = len * 10 + Math.floor(Math.random() * 400);
+      bot.score = len * 10 + Math.floor(Math.random() * 900);
       bots.push(bot);
     }
     return bots;
@@ -58,7 +64,7 @@
 
   function makeBoss(arenaSize) {
     var boss = makeSnake('boss', 'GARGANTUA', { name: 'stripe', colors: ['#ff2e63', '#1a0a1a'] }, 'roamer',
-      arenaSize / 2, arenaSize / 2 + 600, 130, 1.0, 26);
+      300, arenaSize - 300, 130, 1.0, 26);
     boss.score = 5200;
     boss.isBoss = true;
     return boss;
@@ -100,7 +106,7 @@
 
   function moveSnake(snake, dt) {
     var head = snake.pts[0];
-    var turn = 0.12 * dt;
+    var turn = (snake.turnRate || 0.12) * dt;
     var diff = snake.targetAngle - snake.angle;
     while (diff > Math.PI) diff -= Math.PI * 2;
     while (diff < -Math.PI) diff += Math.PI * 2;
