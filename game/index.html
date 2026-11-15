@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Slither Arena — Eat, Boost, Trap &amp; Rule the Leaderboard</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game" width="1280" height="720"></canvas>
+
+  <div id="hud" class="hidden">
+    <div id="hud-left">
+      <div class="hud-title">SLITHER ARENA</div>
+      <div class="hud-row"><span>Score</span><b id="hud-score">0</b></div>
+      <div class="hud-row"><span>Length</span><b id="hud-len">10</b></div>
+      <div class="hud-row"><span>Combo</span><b id="hud-combo">x1</b></div>
+      <div class="hud-row"><span>Rank</span><b id="hud-rank">#10</b></div>
+      <div id="hud-target">Target: reach Top 3 to WIN</div>
+      <div id="hud-power"></div>
+    </div>
+    <div id="hud-right">
+      <div id="leaderboard"><h3>LEADERBOARD</h3><ol id="lb-list"></ol></div>
+      <canvas id="minimap" width="150" height="150"></canvas>
+    </div>
+    <div id="killfeed"></div>
+    <div id="event-banner" class="hidden"></div>
+    <button id="mute-btn" class="round-btn" title="Mute">🔊</button>
+    <div id="boost-hint">Hold SPACE / click &amp; hold to BOOST (shrinks you)</div>
+  </div>
+
+  <div id="start-screen" class="screen">
+    <div class="panel">
+      <h1>SLITHER ARENA</h1>
+      <p class="pitch">Eat orbs, boost past rivals, trap snakes and rule the leaderboard.</p>
+      <div class="start-cols">
+        <div class="start-left">
+          <label class="field-label">Your name</label>
+          <input id="player-name" maxlength="12" value="eightbal" placeholder="Your name">
+          <label class="field-label">Pick your skin</label>
+          <div id="skin-picker"></div>
+          <button id="play-btn" class="big-btn">▶ PLAY</button>
+          <div class="best-line">Best score: <b id="best-score">0</b> &nbsp;•&nbsp; Best length: <b id="best-len">0</b></div>
+          <button id="start-mute" class="small-btn">🔊 Sound: ON</button>
+        </div>
+        <div class="start-right">
+          <h3>HOW TO PLAY</h3>
+          <div class="how-cards">
+            <div class="how-card"><span class="how-ico">●</span><b>Eat orbs</b><p>Glow orbs grow you. Gold orbs are worth 5x.</p></div>
+            <div class="how-card"><span class="how-ico">⚡</span><b>Boost</b><p>Hold SPACE or click to speed up — it costs length.</p></div>
+            <div class="how-card"><span class="how-ico">◎</span><b>Trap rivals</b><p>Cut across a snake's head so it crashes into you. It bursts into orbs.</p></div>
+            <div class="how-card"><span class="how-ico">👑</span><b>Win</b><p>Reach the Top 3 of the leaderboard. Beware the giant boss snake!</p></div>
+          </div>
+          <h3>TOP SNAKES</h3>
+          <ol id="start-lb" class="mini-lb"></ol>
+          <div class="features">✦ 14 rival snakes with their own colours, patterns &amp; personalities &nbsp;•&nbsp; Magnet &amp; Shield orbs &nbsp;•&nbsp; Combo multiplier &nbsp;•&nbsp; Orb-rain events &nbsp;•&nbsp; Boss snake &nbsp;•&nbsp; Synthesized sound, no downloads</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="win-screen" class="screen hidden">
+    <div class="panel win-panel">
+      <h1 class="win-title">🏆 MENANG!</h1>
+      <p class="win-sub">You ruled the arena — Top 3!</p>
+      <div id="win-badge" class="badge hidden">★ REKOR BARU ★</div>
+      <div id="win-stats" class="stats-grid"></div>
+      <div class="btn-row">
+        <button id="win-again" class="big-btn">Main Lagi</button>
+        <button id="win-skin" class="small-btn">Ganti Skin</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="lose-screen" class="screen hidden">
+    <div class="panel lose-panel">
+      <h1 class="lose-title">GAME OVER</h1>
+      <p id="lose-cause" class="lose-cause"></p>
+      <div id="lose-stats" class="stats-grid"></div>
+      <div class="btn-row">
+        <button id="lose-again" class="big-btn">Play Again</button>
+        <button id="lose-menu" class="small-btn">Menu Utama</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="audio.js"></script>
+<script src="bots.js"></script>
+<script src="arena.js"></script>
+<script src="ui.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
