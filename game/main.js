@@ -515,11 +515,25 @@
       resetWorld();
       // seed a busy scene: extra orbs around the player and bots nearby
       var hp = player.pts[0];
-      for (var i = 0; i < 90; i++) orbs.push(Arena.randomOrb(ARENA, hp.x, hp.y, 900));
+      for (var i = 0; i < 45; i++) orbs.push(Arena.randomOrb(ARENA, hp.x, hp.y, 900));
+      // curve the player's body into a gentle S so the shot reads as a living snake, not a stick
+      var pa = Math.random() * Math.PI * 2;
+      player.angle = pa; player.targetAngle = pa;
+      for (var pj = 1; pj < player.pts.length; pj++) {
+        var pw = Math.sin(pj * 0.3) * 12;
+        player.pts[pj].x = hp.x - Math.cos(pa) * pj * 9 - Math.sin(pa) * pw;
+        player.pts[pj].y = hp.y - Math.sin(pa) * pj * 9 + Math.cos(pa) * pw;
+      }
       bots.forEach(function (b, idx) {
-        b.pts[0].x = hp.x + (Math.random() - 0.5) * 900;
-        b.pts[0].y = hp.y + (Math.random() - 0.5) * 700;
-        for (var j = 1; j < b.pts.length; j++) { b.pts[j].x = b.pts[0].x - j * 9; b.pts[j].y = b.pts[0].y; }
+        b.pts[0].x = hp.x + (Math.random() - 0.5) * 1200;
+        b.pts[0].y = hp.y + (Math.random() - 0.5) * 850;
+        var ba = Math.random() * Math.PI * 2;
+        b.angle = ba; b.targetAngle = ba;
+        for (var j = 1; j < b.pts.length; j++) {
+          var bw = Math.sin(j * 0.3) * 12;
+          b.pts[j].x = b.pts[0].x - Math.cos(ba) * j * 9 - Math.sin(ba) * bw;
+          b.pts[j].y = b.pts[0].y - Math.sin(ba) * j * 9 + Math.cos(ba) * bw;
+        }
       });
       state = 'playing';
       GameUI.showScreen(null);
