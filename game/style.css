@@ -83,4 +83,6 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: #0a0e1a; f
   #event-banner { top: 168px; font-size: 14px; padding: 6px 14px; }
   #minimap { display: none; }
   #boost-btn { bottom: 76px; right: 12px; width: 64px; height: 64px; font-size: 13px; }
+  .round-btn { top: auto; left: 12px; bottom: 14px; right: auto; transform: none; width: 32px; height: 32px; font-size: 15px; }
+  #boost-hint { bottom: 44px; }
 }

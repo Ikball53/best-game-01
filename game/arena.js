@@ -97,10 +97,6 @@
 
   function growSnake(snake, amount) {
     snake.targetLen = (snake.targetLen || snake.pts.length) + amount;
-    for (var i = 0; i < amount; i++) {
-      var tail = snake.pts[snake.pts.length - 1];
-      snake.pts.push({ x: tail.x, y: tail.y });
-    }
   }
 
   window.Arena = {

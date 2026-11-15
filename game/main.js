@@ -344,8 +344,9 @@
     if (!demoNoWin && playerRank() <= 3 && score >= 2500 && (Date.now() - startTime) / 1000 >= 60) { doWin(); return; }
 
     // camera follows player
-    camX = head.x - canvas.width / 2;
-    camY = head.y - canvas.height / 2;
+    var wantCamX = head.x - canvas.width / 2, wantCamY = head.y - canvas.height / 2;
+    if (Math.abs(wantCamX - camX) > 400 || Math.abs(wantCamY - camY) > 400) { camX = wantCamX; camY = wantCamY; }
+    else { camX += (wantCamX - camX) * 0.35; camY += (wantCamY - camY) * 0.35; }
 
     // HUD
     document.getElementById('hud-score').textContent = score.toLocaleString('en-US');

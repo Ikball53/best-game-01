@@ -16,6 +16,12 @@
       ctx.fillStyle = Bots.skinColorAt(snake.skin, i);
       ctx.arc(p.x - camX, p.y - camY, Math.max(3, r), 0, Math.PI * 2);
       ctx.fill();
+      var q = pts[i - 1];
+      var mr = snake.radius * (1 - (i - 0.5) / (pts.length + 30) * 0.35);
+      ctx.beginPath();
+      ctx.fillStyle = Bots.skinColorAt(snake.skin, i);
+      ctx.arc((p.x + q.x) / 2 - camX, (p.y + q.y) / 2 - camY, Math.max(3, mr), 0, Math.PI * 2);
+      ctx.fill();
     }
     var h = pts[0];
     ctx.beginPath();
